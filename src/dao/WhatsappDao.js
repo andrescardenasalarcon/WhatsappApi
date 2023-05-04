@@ -71,6 +71,7 @@ class WhatsappDao {
                     var message = messageObject[0];
                     var text = GetTextUser(message);
                     var number = message["from"];
+                    myConsole.log(messageObject);
                     myConsole.log(text);
                     WhatsappService_1.default.SendMessageWhatsApp("The user say: " + text, number);
                 }
