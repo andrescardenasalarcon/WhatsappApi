@@ -11,6 +11,32 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
 const myConsole = new console.Console(fs.createWriteStream("./logs.txt"));
+function GetTextUser(message) {
+    var text = "";
+    var typeMessage = message["type"];
+    if (typeMessage == "text") {
+        text = (message["text"])["body"];
+    }
+    else if (typeMessage == "interactive") {
+        var interactiveObject = (message["interactive"]);
+        var typeInteractive = interactiveObject["type"];
+        myConsole.log(interactiveObject);
+        console.log(interactiveObject);
+        if (typeInteractive == "button_reply") {
+            text = (interactiveObject["button_reply"])["title"];
+        }
+        else if (typeInteractive == "list_reply") {
+            text = (interactiveObject["list_reply"])["title"];
+        }
+        else {
+            myConsole.log("Sin Mensaje");
+        }
+    }
+    else {
+        myConsole.log("Sin Mensaje");
+    }
+    return text;
+}
 class WhatsappDao {
     static VerificarToken(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -38,9 +64,12 @@ class WhatsappDao {
                 var changes = (entry["changes"])[0];
                 var value = changes["value"];
                 var messageObject = value["messages"];
-                myConsole.log(messageObject);
+                if (typeof messageObject != "undefined") {
+                    var message = messageObject[0];
+                    var text = GetTextUser(message);
+                    myConsole.log(text);
+                }
                 res.send("EVENT_RECIVED");
-                console.log(messageObject);
             }
             catch (e) {
                 myConsole.log(e);
