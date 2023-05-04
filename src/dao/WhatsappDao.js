@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
+const WhatsappService_1 = __importDefault(require("../services/WhatsappService"));
 const myConsole = new console.Console(fs.createWriteStream("./logs.txt"));
 function GetTextUser(message) {
     var text = "";
@@ -21,7 +25,6 @@ function GetTextUser(message) {
         var interactiveObject = (message["interactive"]);
         var typeInteractive = interactiveObject["type"];
         myConsole.log(interactiveObject);
-        console.log(interactiveObject);
         if (typeInteractive == "button_reply") {
             text = (interactiveObject["button_reply"])["title"];
         }
@@ -67,7 +70,9 @@ class WhatsappDao {
                 if (typeof messageObject != "undefined") {
                     var message = messageObject[0];
                     var text = GetTextUser(message);
+                    var number = message["from"];
                     myConsole.log(text);
+                    WhatsappService_1.default.SendMessageWhatsApp("The user say: " + text, number);
                 }
                 res.send("EVENT_RECIVED");
             }
