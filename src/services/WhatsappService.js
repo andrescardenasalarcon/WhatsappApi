@@ -19,7 +19,7 @@ class WhatsappService {
             body: data,
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + process.env.PASS_SECRET
+                Authorization: "Bearer " + String(process.env.PASS_SECRET)
             },
         };
         const req = https.request(options, (res) => { res.on("data", (d) => { process.stdout.write(d); }); });
