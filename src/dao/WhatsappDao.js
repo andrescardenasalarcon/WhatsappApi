@@ -12,8 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const WhatsappService_1 = __importDefault(require("../services/WhatsappService"));
-const SampleModels_1 = __importDefault(require("../shared/SampleModels"));
+const ProcessMessage_1 = __importDefault(require("../shared/ProcessMessage"));
 const fs = require("fs");
 const myConsole = new console.Console(fs.createWriteStream("./logs.txt"));
 function GetTextUser(message) {
@@ -72,42 +71,9 @@ class WhatsappDao {
                     var message = messageObject[0];
                     var text = GetTextUser(message);
                     var number = message["from"];
-                    // myConsole.log(text);
-                    if (text == "Text") {
-                        var data = SampleModels_1.default.SampleText("Hi user: ", number);
-                        WhatsappService_1.default.SendMessageWhatsApp(data);
-                    }
-                    else if (text == "Image") {
-                        var data = SampleModels_1.default.SampleImage(number);
-                        WhatsappService_1.default.SendMessageWhatsApp(data);
-                    }
-                    else if (text == "Video") {
-                        var data = SampleModels_1.default.SampleVideo(number);
-                        WhatsappService_1.default.SendMessageWhatsApp(data);
-                    }
-                    else if (text == "Audio") {
-                        var data = SampleModels_1.default.SampleAudio(number);
-                        WhatsappService_1.default.SendMessageWhatsApp(data);
-                    }
-                    else if (text == "Document") {
-                        var data = SampleModels_1.default.SampleDocument(number);
-                        WhatsappService_1.default.SendMessageWhatsApp(data);
-                    }
-                    else if (text == "Button") {
-                        var data = SampleModels_1.default.SampleButtons(number);
-                        WhatsappService_1.default.SendMessageWhatsApp(data);
-                    }
-                    else if (text == "List") {
-                        var data = SampleModels_1.default.SampleList(number);
-                        WhatsappService_1.default.SendMessageWhatsApp(data);
-                    }
-                    else if (text == "Location") {
-                        var data = SampleModels_1.default.SampleLocation(number);
-                        WhatsappService_1.default.SendMessageWhatsApp(data);
-                    }
-                    else {
-                        var data = SampleModels_1.default.SampleText("I dont know", number);
-                        WhatsappService_1.default.SendMessageWhatsApp(data);
+                    myConsole.log(text);
+                    if (text != "") {
+                        ProcessMessage_1.default.Process(text, number);
                     }
                 }
                 res.send("EVENT_RECIVED");
