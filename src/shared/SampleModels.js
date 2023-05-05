@@ -100,9 +100,9 @@ class SampleModels {
                     "type": "text",
                     "text": "Tengo estas opciones"
                 },
-                // "body": {
-                //     "text": "Son:"
-                // },
+                "body": {
+                    "text": "Son:"
+                },
                 "footer": {
                     "text": "Selecciona una de las opciones para poder atenderte"
                 },

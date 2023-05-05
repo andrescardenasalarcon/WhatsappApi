@@ -69,10 +69,11 @@ class WhatsappDao {
                 var messageObject = value["messages"];
                 if (typeof messageObject != "undefined") {
                     var message = messageObject[0];
-                    var text = GetTextUser(message);
                     var number = message["from"];
-                    myConsole.log(text);
+                    var text = GetTextUser(message);
                     if (text != "") {
+                        myConsole.log(text);
+                        myConsole.log(number);
                         ProcessMessage_1.default.Process(text, number);
                     }
                 }
