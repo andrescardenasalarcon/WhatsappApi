@@ -74,7 +74,7 @@ class WhatsappDao {
                     if (text != "") {
                         myConsole.log(text);
                         myConsole.log(number);
-                        ProcessMessage_1.default.Process(text, number);
+                        yield ProcessMessage_1.default.Process(text, number);
                     }
                 }
                 res.send("EVENT_RECIVED");
