@@ -48,7 +48,7 @@ class WhatsappDao {
                 var token = req.query["hub.verify_token"];
                 var challenge = req.query["hub.challenge"];
                 if (challenge != null && token != null && token == accessToken) {
-                    res.send(challenge);
+                    res.status(200).send(challenge);
                 }
                 else {
                     res.status(400).send();
@@ -57,7 +57,6 @@ class WhatsappDao {
             catch (e) {
                 res.status(400).send();
             }
-            res.status(200).send("Hola verifyToken");
         });
     }
     static RecivedMessage(req, res) {

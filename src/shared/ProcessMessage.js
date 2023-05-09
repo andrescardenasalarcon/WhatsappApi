@@ -62,7 +62,7 @@ class ProcessMessage {
                 models.push(model);
             }
             //#endregion
-            models.forEach(model => {
+            models.forEach((model) => {
                 WhatsappService_1.default.SendMessageWhatsApp(model);
             });
         });
